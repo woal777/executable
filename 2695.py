@@ -31,6 +31,7 @@ pwd >> /home/jinho93/.qhistory
 ''')
 
 
+
 with open('queue_script', 'w') as f:
     f.writelines(lines)
 
