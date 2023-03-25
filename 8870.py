@@ -1,4 +1,4 @@
-#!/home/jinho93/bin/python3.7
+#!/home/jinho93/bin/python3
 import sys, os
 import argparse
 
@@ -17,7 +17,9 @@ name = parser.parse_args().name
 system = parser.parse_args().s
 ver = parser.parse_args().v
 
-lines = ["#$ " + r + '\n' for r in [f'-pe mpi_{core} {core}', f'-N {name}', '-cwd', '-q 8870v3.q', '-V', '-S /bin/bash']]
+lines = ["#$ " + r + '\n' for r in [f'-pe mpi_{core} {core}', f'-N {name}', '-cwd', '-q 8870.q', '-V', '-S /bin/bash']]
+lines.append('#$ -o $JOB_NAME.o$JOB_ID\n')
+lines.append('#$ -j Y\n')
 
 if ver == 'oop' or ver == 'neb':
     lines.append(f'''mpirun -machinefile $TMPDIR/machines -n $NSLOTS /opt/vasp/vasp.6.4.0/bin/vasp_{system} > report.vasp
@@ -25,7 +27,7 @@ touch complete
 pwd >> /home/jinho93/.qhistory
 ''')
 else:
-    lines.append(f'''mpirun -machinefile $TMPDIR/machines -n $NSLOTS /opt/vasp/vasp.6.3.0/bin/vasp_{system} > report.vasp
+    lines.append(f'''mpirun -machinefile $TMPDIR/machines -n $NSLOTS /opt/vasp/vasp.6.4.0/bin/vasp_{system} > report.vasp
 touch complete
 pwd >> /home/jinho93/.qhistory
 ''')
