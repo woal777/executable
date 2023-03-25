@@ -1,9 +1,0 @@
-#$ -pe mpi_72 72
-#$ -N sin
-#$ -cwd
-#$ -q 8870.q
-#$ -V
-#$ -S /bin/bash
-mpirun -machinefile $TMPDIR/machines -n $NSLOTS /opt/vasp/vasp.6.4.0/bin/vasp_gam > report.vasp
-touch complete
-pwd >> /home/jinho93/.qhistory
